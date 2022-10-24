@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/cart/cart_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/home/home_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/profile/profile_screen.dart';
+import 'package:naqsh_client/src/ui/bottom_menu/cart/cart_screen.dart';
+import 'package:naqsh_client/src/ui/bottom_menu/profile/profile_screen.dart';
+
+import 'home/home_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
    MainScreen({Key? key}) : super(key: key);

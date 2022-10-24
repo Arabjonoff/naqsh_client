@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/ui/auth/login/login_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/cart/cart_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/home/home_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/main_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/profile/order/order_screen.dart';
-import 'package:naqsh_client/src/ui/bottom_navigation/profile/profile_screen.dart';
+import 'package:naqsh_client/src/ui/bottom_menu/main_screen.dart';
+import 'package:naqsh_client/src/ui/bottom_menu/profile/profile_screen.dart';
 import 'package:naqsh_client/src/ui/detail/detail_screen.dart';
+
+import '../ui/bottom_menu/cart/cart_screen.dart';
+import '../ui/bottom_menu/home/home_screen.dart';
+import '../ui/bottom_menu/profile/order/order_screen.dart';
 
 class RouterGenerator {
   Route? onGenerator(RouteSettings settings) {

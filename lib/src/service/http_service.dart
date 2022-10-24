@@ -1,20 +1,36 @@
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:naqsh_client/src/service/base_service.dart';
+import '../model/http/http_model.dart';
 import 'package:http/http.dart' as http;
+class HttpService{
+  final String baseUrl = 'https://naqshsoft.site/';
 
-class HttpService extends BaseService{
-  dynamic responseJson;
-  @override
-  Future getResponse(String url) async {
+  Future getRequest(String url) async{
     try {
       http.Response response = await http.get(Uri.parse(baseUrl + url));
-      print(response.statusCode);
+      print(url);
       print(response.body);
+      return result(response);
     } on SocketException {
       throw Exception('Internet error');
     }
-    return responseJson;
   }
 
+  HttpResult result(http.Response response) {
+    print(response.body);
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return HttpResult(
+        isSuccess: true,
+        statusCode: response.statusCode,
+        result: json.decode(response.body),
+      );
+    } else {
+      return HttpResult(
+        isSuccess: false,
+        statusCode: response.statusCode,
+        result: response.body,
+      );
+    }
+  }
 }

@@ -6,26 +6,26 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   LoginModel({
-    required this.status,
+    this.status,
     required this.d1,
     required this.d2,
     required this.d3,
     required this.d4,
     required this.name,
     required this.idT,
-    required this.jwt,
-    required this.message,
+     this.jwt,
+     this.message,
   });
 
-  bool status;
+  bool? status;
   int d1;
   int d2;
   int d3;
   int d4;
   String name;
   String idT;
-  String jwt;
-  String message;
+  String? jwt;
+  String? message;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
     status: json["status"]??false,
@@ -40,14 +40,11 @@ class LoginModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
     "D1": d1,
     "D2": d2,
     "D3": d3,
     "D4": d4,
     "NAME": name,
     "ID_T": idT,
-    "JWT": jwt,
-    "message": message,
   };
 }
