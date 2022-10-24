@@ -1,0 +1,15 @@
+{
+  "bottom_bar": {
+    "home": "Asosiy",
+    "cart": "Savat",
+    "profile": "Profil"
+  },
+  "button": {
+    "text": "Buyurtma berish",
+    "text1": "Tasdiqlash"
+  },
+  "profile":{
+    "title": "Profil",
+    "title": "Profil",
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/cart/cart_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/home/home_screen.dart';
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
         },
         currentIndex: selectedIndex,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home,),label: 'Asosiy',),
+          BottomNavigationBarItem(icon: Icon(Icons.home,),label: 'profile.theme',),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined,),label: 'Savat'),
           BottomNavigationBarItem(icon: Icon(Icons.person_outline,),label: 'Profile'),
         ],

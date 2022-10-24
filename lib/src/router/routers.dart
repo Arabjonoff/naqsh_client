@@ -3,6 +3,7 @@ import 'package:naqsh_client/src/ui/auth/login/login_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/cart/cart_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/home/home_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/main_screen.dart';
+import 'package:naqsh_client/src/ui/bottom_navigation/profile/order/order_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_navigation/profile/profile_screen.dart';
 import 'package:naqsh_client/src/ui/detail/detail_screen.dart';
 
@@ -22,6 +23,8 @@ class RouterGenerator {
         return _navigate(CartScreen());
       case '/profile':
         return _navigate(ProfileScreen());
+      case '/order':
+        return _navigate(OrderScreen());
     }
     return null;
   }

@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Text('Hisobga Kirish',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                const Text('Tizimga Kirish',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                 const SizedBox(height: 16,),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
