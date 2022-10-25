@@ -15,8 +15,10 @@ class GetCategoryDetailModel {
 
   factory GetCategoryDetailModel.fromJson(Map<String, dynamic> json) =>
       GetCategoryDetailModel(
-        data: List<ProductResult>.from(
-            json["data"].map((x) => ProductResult.fromJson(x))),
+        data: json["data"] == null
+            ? <ProductResult>[]
+            : List<ProductResult>.from(
+                json["data"].map((x) => ProductResult.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +40,7 @@ class ProductResult {
     required this.yil,
     required this.oy,
     required this.idSkl0,
+    this.count = 0,
   });
 
   int id;
@@ -52,6 +55,7 @@ class ProductResult {
   String yil;
   String oy;
   int idSkl0;
+  int count;
 
   factory ProductResult.fromJson(Map<String, dynamic> json) => ProductResult(
         id: json["ID"] ?? 0,
@@ -66,6 +70,7 @@ class ProductResult {
         yil: json["YIL"] ?? "",
         oy: json["OY"] ?? "",
         idSkl0: json["ID_SKL0"] ?? 0,
+        count: json["count"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,5 +86,6 @@ class ProductResult {
         "YIL": yil,
         "OY": oy,
         "ID_SKL0": idSkl0,
+        "count": count,
       };
 }

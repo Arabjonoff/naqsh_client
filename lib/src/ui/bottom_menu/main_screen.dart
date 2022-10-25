@@ -32,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
         },
         currentIndex: selectedIndex,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home,),label: 'profile.theme',),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined,),label: 'Savat'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline,),label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.home,),label: '',),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined,),label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline,),label: ''),
         ],
       ),
       body:screens[selectedIndex]

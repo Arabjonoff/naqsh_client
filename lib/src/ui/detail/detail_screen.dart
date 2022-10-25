@@ -57,27 +57,93 @@ class _DetailScreenState extends State<DetailScreen> {
                              ],
                            ),
                          ),
+                         data[index].count ==0?GestureDetector(
+                           onTap: (){
+                             setState((){
+                               categoryDetailBloc.updateCart(data[index], false);
+                             });
+                           },
+                           child: Container(
+                             margin: const EdgeInsets.symmetric(horizontal: 8),
+                             padding: const EdgeInsets.symmetric(vertical: 7),
+                             decoration: BoxDecoration(
+                                 color: Colors.indigo,
+                                 borderRadius: BorderRadius.circular(5)
+                             ),
+                             width: MediaQuery.of(context).size.width,
+                             child: const Center(child: Text('Savatga olish',style: TextStyle(color: Colors.white),)),
+                           ),
+                         ):
                          Container(
-                           margin: const EdgeInsets.symmetric(horizontal: 8),
-                           padding: const EdgeInsets.symmetric(vertical: 2),
-                           decoration: BoxDecoration(
-                               color: Colors.indigo,
-                               borderRadius: BorderRadius.circular(5)
+                           margin: const EdgeInsets.symmetric(
+                             horizontal: 10
                            ),
                            width: MediaQuery.of(context).size.width,
-                           child: Container(
-                             width: MediaQuery.of(context).size.width,
-                             padding: const EdgeInsets.all(5),
-                             margin: const EdgeInsets.symmetric(horizontal: 16),
-                             child: Center(child: const Text('Savatga olish',style: TextStyle(color: Colors.white),)),
+                           child: Row(
+                             children: [
+                              GestureDetector(
+                                 onTap: () {
+                                   setState(() {
+                                     categoryDetailBloc.updateCart(
+                                         data[index],
+                                         true);
+                                   });
+                                 },
+                                 child: Container(
+                                   decoration:
+                                   BoxDecoration(
+                                     borderRadius:
+                                     BorderRadius
+                                         .circular(
+                                         5),
+                                     color:
+                                     Colors.indigo,
+                                   ),
+                                   padding:
+                                   const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 5,
+                                       vertical: 1),
+                                   child: const Icon(
+                                     Icons.remove,
+                                     color: Colors.white,
+                                   ),
+                                 ),
+                               ),
+                               Expanded(
+                                   child: Center(
+                                       child: Text(
+                                         data[index].count.toString(),
+                                         style: TextStyle(
+                                             fontWeight:
+                                             FontWeight.w600),
+                                       ))),
+                               GestureDetector(
+                                 onTap: () {
+                                   setState(() {
+                                     categoryDetailBloc.updateCart(
+                                         data[index], false);
+                                   });
+                                 },
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 5,
+                                       vertical: 1),
+                                   decoration: BoxDecoration(
+                                     borderRadius:
+                                     BorderRadius.circular(
+                                         5),
+                                     color: Colors.indigo,
+                                   ),
+                                   child: const Icon(
+                                     Icons.add,
+                                     color: Colors.white,
+                                   ),
+                                 ),
+                               ),
+                             ],
                            ),
-                           // Row(
-                           //   children: [
-                           //     Expanded(child: Icon(Icons.remove)),
-                           //     Expanded(child: Center(child: Text('1'))),
-                           //     Expanded(child: Icon(Icons.add)),
-                           //   ],
-                           // ),
                          ),
                          const SizedBox(height: 8,),
                        ],

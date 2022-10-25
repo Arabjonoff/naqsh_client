@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/http/http_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/order/order_model.dart';
+
 class AppProvider {
   final String baseUrl = 'https://naqshsoft.site/';
 
@@ -14,6 +16,21 @@ class AppProvider {
       print(url);
       return _result(response);
   }
+
+
+  Future<HttpResult> _postRequest(String url, body) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')??'';
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+    );
+    print(url);
+    print(body);
+    return _result(response);
+  }
+
+
   HttpResult _result(http.Response response) {
     print(response.body);
     if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -60,5 +77,14 @@ class AppProvider {
     var db = prefs.getString('db');
     String url = '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
     return await _getRequest(url);
+  }
+
+  Future<HttpResult> orderProducts(List<OrderModel> order) async {
+    DateTime dateTime =  DateTime.now();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')??'';
+    String db = prefs.getString('db') ??'';
+    String url = 'https://naqshsoft.site/tzakaz?DB=$db';
+    return await _postRequest(url,json.encode(order));
   }
 }

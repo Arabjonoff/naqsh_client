@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ss'),
+        title: const Text('Kategoriyalar'),
       ),
       body: SafeArea(
         child: StreamBuilder<CategoryModel>(
