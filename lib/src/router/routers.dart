@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naqsh_client/src/model/category/category_model.dart';
 import 'package:naqsh_client/src/ui/auth/login/login_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_menu/main_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_menu/profile/profile_screen.dart';
@@ -17,9 +18,9 @@ class RouterGenerator {
       case '/':
         return _navigate(MainScreen());
       case '/home':
-        return _navigate(HomeScreen());
+        return _navigate(HomeScreen(db: args,));
       case '/detail':
-        return _navigate(DetailScreen());
+        return _navigate(DetailScreen(data: args as CategoryResult,));
       case '/cart':
         return _navigate(CartScreen());
       case '/profile':

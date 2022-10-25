@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
-
-import 'package:naqsh_client/src/service/http_service.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../model/http/http_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,8 +36,29 @@ class AppProvider {
     return await _getRequest(url);
   }
 
-  Future<HttpResult> getProducts() async {
-    String url = '${baseUrl}tip?DB=002';
+  Future<HttpResult> getCategory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var db = prefs.getString('db');
+    String url = '${baseUrl}tip?DB=$db';
+    return await _getRequest(url);
+  }
+
+  Future<HttpResult> getUsd() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var db = prefs.getString('db');
+    String url = '${baseUrl}getkurs?DB=$db';
+    return await _getRequest(url);
+  }
+
+  Future<HttpResult> getCategoryDetail(int st,id) async {
+    var now = DateTime.now();
+    var years = DateFormat('yyyy');
+    var months = DateFormat('MM');
+    String year = years.format(now);
+    String month = months.format(now);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var db = prefs.getString('db');
+    String url = '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
     return await _getRequest(url);
   }
 }

@@ -1,6 +1,6 @@
 class HttpResult {
-  int? statusCode;
-  bool? isSuccess;
+  int statusCode;
+  bool isSuccess;
   dynamic result;
 
   HttpResult({

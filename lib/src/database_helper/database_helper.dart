@@ -74,4 +74,8 @@ class DataBaseLogin {
     }
     return data;
   }
+  Future<void> clear() async {
+    var dbClient = await db;
+    await dbClient.rawQuery('DELETE FROM $tableName');
+  }
 }
