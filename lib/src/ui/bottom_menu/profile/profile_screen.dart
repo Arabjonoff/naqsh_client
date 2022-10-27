@@ -56,7 +56,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                    snapshot.data![0].d3==1? Padding(
                      padding: const EdgeInsets.only(bottom: 10.0),
-                     child: Text('Qarzim ${getDebt} uzs',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                     child: Text('Qarzdorlik -${getDebt} uzs',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                   ):const SizedBox(height: 10,),
+                   snapshot.data![0].d3==1? Padding(
+                     padding: const EdgeInsets.only(bottom: 10.0),
+                     child: Text('Dollar -${getDebtS.toStringAsFixed(2)} usd',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
                    ):const SizedBox(height: 10,),
                     snapshot.data![0].d4== 1?Padding(
                       padding: const EdgeInsets.only(bottom: 10.0,top: 0),
@@ -133,8 +137,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final Map<String ,dynamic> data = json.decode(response.body);
     setState((){
       getDebt = data['KARZI'];
+      getDebtS = data['KARZI_S'];
     });
   }
   int getUsd = 0;
   int getDebt = 0;
+  double getDebtS = 0;
 }

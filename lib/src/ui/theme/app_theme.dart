@@ -6,8 +6,9 @@ class AppTheme{
       brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        backgroundColor: Colors.indigo
+        backgroundColor: Color(0xFF5F6DF8)
       ),
+      scaffoldBackgroundColor: const Color(0xFFF3F3F4)
     );
   }
   static ThemeData dark(){

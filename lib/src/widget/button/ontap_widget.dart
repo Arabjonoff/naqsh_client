@@ -13,7 +13,7 @@ class OnTapWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical:18),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.indigo
+          color: const Color(0xFF5F6DF8)
         ),
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),

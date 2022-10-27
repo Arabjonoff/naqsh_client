@@ -67,7 +67,7 @@ class _DetailScreenState extends State<DetailScreen> {
                              margin: const EdgeInsets.symmetric(horizontal: 8),
                              padding: const EdgeInsets.symmetric(vertical: 7),
                              decoration: BoxDecoration(
-                                 color: Colors.indigo,
+                                 color: const Color(0xFF5F6DF8),
                                  borderRadius: BorderRadius.circular(5)
                              ),
                              width: MediaQuery.of(context).size.width,
@@ -97,7 +97,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                          .circular(
                                          5),
                                      color:
-                                     Colors.indigo,
+                                     const Color(0xFF5F6DF8),
                                    ),
                                    padding:
                                    const EdgeInsets
@@ -134,7 +134,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                      borderRadius:
                                      BorderRadius.circular(
                                          5),
-                                     color: Colors.indigo,
+                                     color: const Color(0xFF5F6DF8),
                                    ),
                                    child: const Icon(
                                      Icons.add,
