@@ -193,7 +193,6 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     OnTapWidget(onTap: () async {
-                      print('object');
                       List<Tzakaz1> p = [];
                       for (int i = 0; i < data.length; i++) {
                         Tzakaz1 tzakaz1 = Tzakaz1(

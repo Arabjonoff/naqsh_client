@@ -103,7 +103,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                    const EdgeInsets
                                        .symmetric(
                                        horizontal: 5,
-                                       vertical: 1),
+                                       vertical: 3.5),
                                    child: const Icon(
                                      Icons.remove,
                                      color: Colors.white,
@@ -129,7 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                    padding: const EdgeInsets
                                        .symmetric(
                                        horizontal: 5,
-                                       vertical: 1),
+                                       vertical: 3.5),
                                    decoration: BoxDecoration(
                                      borderRadius:
                                      BorderRadius.circular(

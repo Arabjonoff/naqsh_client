@@ -36,4 +36,6 @@ class Repository {
 
   Future orderProducts(List<OrderModel> order) => _provider.orderProducts(order);
 
+  Future getOrderProducts( ) => _provider.getOrderProducts();
+
 }

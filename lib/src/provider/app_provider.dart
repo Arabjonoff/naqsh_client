@@ -87,4 +87,12 @@ class AppProvider {
     String url = 'https://naqshsoft.site/tzakaz?DB=$db';
     return await _postRequest(url,json.encode(order));
   }
+
+  Future<HttpResult> getOrderProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String db = prefs.getString('db') ??'';
+    String url = 'https://naqshsoft.site/tzakaz?DB=$db';
+    return await _getRequest(url,);
+  }
+
 }

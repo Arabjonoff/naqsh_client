@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uz.naqshsoft.naqsh_client">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="naqsh_client"
         android:name="${applicationName}"
