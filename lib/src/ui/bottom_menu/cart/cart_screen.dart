@@ -58,6 +58,7 @@ class _CartScreenState extends State<CartScreen> {
                                      width: 60,
                                        child: ImageWidget(id: data[index].idSkl2))
                                  ),
+                                const SizedBox(width: 5,),
                                 Expanded(
                                   child: Column(
                                     children: [
@@ -188,6 +189,34 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           );
                         },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF5F6DF8),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Tovarlar soni:',style: TextStyle(color: Colors.white,fontSize: 16),),
+                              Text(data.length.toString() + " dona",style: TextStyle(color: Colors.white,fontSize: 16)),
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Umumiy narxi:',style: TextStyle(color: Colors.white,fontSize: 16),),
+                              Text("${price.toInt()} dona",style: const TextStyle(color: Colors.white,fontSize: 16)),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     OnTapWidget(onTap: () async {

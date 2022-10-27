@@ -82,14 +82,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         })
                     ),
-                    ListTile(
-                      onTap: (){
-                        ShowBottomLanguageDialog.showLangDialog(context);
-                      },
-                      leading: Icon(Icons.language),
-                      title: Text('Tilni ozgartish'),
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
+                    // ListTile(
+                    //   onTap: (){
+                    //     ShowBottomLanguageDialog.showLangDialog(context);
+                    //   },
+                    //   leading: Icon(Icons.language),
+                    //   title: Text('Tilni ozgartish'),
+                    //   trailing: Icon(Icons.arrow_forward_ios),
+                    // ),
                     ListTile(
                       onTap: (){
                         Navigator.pushNamed(context, '/order');
