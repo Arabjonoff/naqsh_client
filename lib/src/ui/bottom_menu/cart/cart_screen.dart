@@ -3,6 +3,7 @@ import 'package:naqsh_client/src/bloc/cart/cart_bloc.dart';
 import 'package:naqsh_client/src/dialog/error_dialog/error_dialog.dart';
 import 'package:naqsh_client/src/model/category/category_detail/category_detail_model.dart';
 import 'package:naqsh_client/src/widget/button/ontap_widget.dart';
+import 'package:naqsh_client/src/widget/image/image_widget.dart';
 
 import '../../../model/http/http_model.dart';
 import '../../../model/message/message_model.dart';
@@ -51,16 +52,12 @@ class _CartScreenState extends State<CartScreen> {
                             elevation: 5,
                             child: Row(
                               children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Card(
-                                    elevation: 2,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(20.0),
-                                      child: Icon(Icons.image),
-                                    ),
-                                  ),
-                                ),
+                                 Card(
+                                   elevation: 0,
+                                   child: SizedBox(
+                                     width: 60,
+                                       child: ImageWidget(id: data[index].idSkl2))
+                                 ),
                                 Expanded(
                                   child: Column(
                                     children: [
@@ -183,6 +180,7 @@ class _CartScreenState extends State<CartScreen> {
                                           )
                                         ],
                                       ),
+                                      const SizedBox(height: 10,)
                                     ],
                                   ),
                                 ),

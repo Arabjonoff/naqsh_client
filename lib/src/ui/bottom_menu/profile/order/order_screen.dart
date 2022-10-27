@@ -22,7 +22,7 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buyurtmalar'),
-        actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.filter_alt))],
+        actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.calendar_month_sharp))],
       ),
       body: SafeArea(
         child: StreamBuilder<GetOrderModel>(

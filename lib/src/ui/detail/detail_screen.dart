@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/bloc/category/category_detail/category_detail_bloc.dart';
 import 'package:naqsh_client/src/model/category/category_detail/category_detail_model.dart';
+import 'package:naqsh_client/src/widget/image/image_widget.dart';
 import '../../model/category/category_model.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _DetailScreenState extends State<DetailScreen> {
                      child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children:  [
-                          Expanded(child: Center(child:Icon(Icons.image))),
+                          Expanded(child: ImageWidget(id: data[index].idSkl2,)),
                          Padding(
                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                            child: Text(data[index].name),
