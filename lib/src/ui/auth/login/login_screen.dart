@@ -121,4 +121,19 @@ class LoginScreen extends StatelessWidget {
       }
     }
   }
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content:  Row(
+        children: [
+          const CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:const Text("Loading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: true,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
 }

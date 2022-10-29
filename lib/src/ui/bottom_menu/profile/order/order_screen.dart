@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:naqsh_client/src/model/order/get_order/get_order_model.dart';
@@ -21,8 +22,7 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buyurtmalar'),
-        actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.calendar_month_sharp))],
+        title:  Text('orders'.tr()),
       ),
       body: SafeArea(
         child: StreamBuilder<GetOrderModel>(
@@ -66,7 +66,9 @@ class _OrderScreenState extends State<OrderScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text('Tovar nomi:',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
-                             Text(data.result[index].tzakaz1.map((e) => e.name).toString())
+                              Expanded(
+                                child: Text(data.result[index].tzakaz1.map((e) => e.name).toString(),textAlign: TextAlign.right,),
+                              )
                             ],),
                         ),
                       ],

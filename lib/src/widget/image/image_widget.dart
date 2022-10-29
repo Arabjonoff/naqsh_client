@@ -29,6 +29,7 @@ class _ImageWidgetState extends State<ImageWidget> {
     return Center(
       child: CachedNetworkImage(
         imageUrl: "https://naqshsoft.site/images/$image",
+        fit: BoxFit.cover,
         placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
         errorWidget: (context, url, error) => Center(child: Icon(Icons.image)),
       ),

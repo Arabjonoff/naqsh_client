@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -54,14 +55,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: EdgeInsets.only(bottom: 10.0,top: 10),
                       child: Text(snapshot.data![0].name,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                     ),
-                   snapshot.data![0].d3==1? Padding(
-                     padding: const EdgeInsets.only(bottom: 10.0),
-                     child: Text('Qarzdorlik -${getDebt} uzs',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
-                   ):const SizedBox(height: 10,),
-                   snapshot.data![0].d3==1? Padding(
-                     padding: const EdgeInsets.only(bottom: 10.0),
-                     child: Text('Dollar -${getDebtS.toStringAsFixed(2)} usd',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
-                   ):const SizedBox(height: 10,),
+                   snapshot.data![0].d3==1? Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 10.0),
+                       child: Text('${'debt'.tr()}- ${getDebt} som',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 10.0),
+                       child: Text(' ${getDebtS} \$',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                     ),
+                   ],):const SizedBox(height: 10,),
                     snapshot.data![0].d4== 1?Padding(
                       padding: const EdgeInsets.only(bottom: 10.0,top: 0),
                       child: Text('Kod ${snapshot.data![0].idT}',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w400),),
@@ -69,12 +74,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     ListTile(
                         leading: Icon(Icons.attach_money),
-                        title: Text('Valyuta kursi'),
+                        title: Text('usd'.tr()),
                         trailing: Text(getUsd.toString() +' uzs',style: TextStyle(fontWeight: FontWeight.bold),)
                     ),
                     ListTile(
                         leading: Icon(Icons.dark_mode),
-                        title: Text('Temani ozgartish'),
+                        title: Text('dark_mode'.tr()),
                         trailing: CupertinoSwitch(value: _isDark, onChanged: (value){
                           setState(() {
                             _isDark = !_isDark;
@@ -82,20 +87,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         })
                     ),
-                    // ListTile(
-                    //   onTap: (){
-                    //     ShowBottomLanguageDialog.showLangDialog(context);
-                    //   },
-                    //   leading: Icon(Icons.language),
-                    //   title: Text('Tilni ozgartish'),
-                    //   trailing: Icon(Icons.arrow_forward_ios),
-                    // ),
+                    ListTile(
+                      onTap: (){
+                        ShowBottomLanguageDialog.showLangDialog(context);
+                      },
+                      leading: Icon(Icons.language),
+                      title: Text('set_lang'.tr()),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                    ),
                     ListTile(
                       onTap: (){
                         Navigator.pushNamed(context, '/order');
                       },
                       leading: Icon(Icons.shopping_bag_outlined),
-                      title: Text('Buyurtmalar'),
+                      title: Text('orders'.tr()),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                     ListTile(
@@ -103,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ShowLogOutDialog.showLogOutDialog(context);
                       },
                       leading: Icon(Icons.logout),
-                      title: Text('Tizimdan chiqish'),
+                      title: Text('logout'.tr()),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ],
@@ -140,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       getDebtS = data['KARZI_S'];
     });
   }
-  int getUsd = 0;
-  int getDebt = 0;
-  double getDebtS = 0;
+  dynamic getUsd = 0;
+  dynamic getDebt = 0;
+  dynamic getDebtS = 0;
 }

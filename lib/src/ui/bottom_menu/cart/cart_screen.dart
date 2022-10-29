@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/bloc/cart/cart_bloc.dart';
 import 'package:naqsh_client/src/dialog/error_dialog/error_dialog.dart';
@@ -29,7 +30,7 @@ class _CartScreenState extends State<CartScreen> {
     final Repository _repository = Repository();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Savat'),
+        title:  Text('cart'.tr()),
       ),
       body: SafeArea(
         child: StreamBuilder<List<ProductResult>>(
@@ -204,7 +205,7 @@ class _CartScreenState extends State<CartScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Tovarlar soni:',style: TextStyle(color: Colors.white,fontSize: 16),),
+                               Text('product_count'.tr(),style: TextStyle(color: Colors.white,fontSize: 16),),
                               Text(data.length.toString() + " dona",style: TextStyle(color: Colors.white,fontSize: 16)),
                             ],
                           ),
@@ -212,8 +213,8 @@ class _CartScreenState extends State<CartScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Umumiy narxi:',style: TextStyle(color: Colors.white,fontSize: 16),),
-                              Text("${price.toInt()} dona",style: const TextStyle(color: Colors.white,fontSize: 16)),
+                               Text('all_price'.tr(),style: TextStyle(color: Colors.white,fontSize: 16),),
+                              Text("${price.toInt()} so\'m",style: const TextStyle(color: Colors.white,fontSize: 16)),
                             ],
                           ),
                         ],
@@ -255,7 +256,7 @@ class _CartScreenState extends State<CartScreen> {
                           ShowErrorDialog.showErrorDialog(context,'Xatolik', result.message,);
                         }
                       }
-                    }, text: 'Buyurtma berish'),
+                    }, text: 'order'.tr()),
                   ],
                 );
               }

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/bloc/category/category_bloc.dart';
-import 'package:naqsh_client/src/bloc/order/get_order_bloc.dart';
 import 'package:naqsh_client/src/model/category/category_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart'as http;
 
 class HomeScreen extends StatefulWidget {
   final db;
@@ -16,13 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   initState(){
     super.initState();
+    usd();
     categoryBloc.getCategory();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kategoriyalar'),
+        title:  Text(clientName),
       ),
       body: SafeArea(
         child: StreamBuilder<CategoryModel>(
@@ -70,4 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  usd()async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var db = preferences.getString('db');
+    http.Response response = await http.get(Uri.parse('https://naqshsoft.site/getkurs?DB=$db&'));
+    final Map<String ,dynamic> data = json.decode(response.body);
+    var getcurs = data['KURS'];
+    preferences.setInt('curs',getcurs);
+    setState((){
+      clientName = data['NAME'];
+    });
+  }
+  String clientName = '';
 }

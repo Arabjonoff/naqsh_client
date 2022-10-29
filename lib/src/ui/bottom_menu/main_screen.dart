@@ -20,22 +20,29 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       HomeScreen(),
-      CartScreen(),
-      ProfileScreen(),
+      const CartScreen(),
+      const ProfileScreen(),
     ];
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (screens){
-          setState((){
-            selectedIndex = screens;
-          });
-        },
-        currentIndex: selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home,),label: '',),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined,),label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline,),label: ''),
-        ],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+        child: BottomNavigationBar(
+          selectedItemColor: const Color(0xFF5F6DF8),
+          onTap: (screens){
+            setState((){
+              selectedIndex = screens;
+            });
+          },
+          currentIndex: selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home,),label: '',),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined,),label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person_outline,),label: ''),
+          ],
+        ),
       ),
       body:screens[selectedIndex]
     );

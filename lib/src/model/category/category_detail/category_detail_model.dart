@@ -45,16 +45,16 @@ class ProductResult {
 
   int id;
   String name;
-  int idSkl2;
-  int idTip;
-  int narhi;
-  int narhiS;
-  int snarhi;
+  dynamic idSkl2;
+  dynamic idTip;
+  dynamic narhi;
+  dynamic narhiS;
+  dynamic snarhi;
   int snarhiS;
-  double osoni;
+  dynamic osoni;
   String yil;
   String oy;
-  int idSkl0;
+  dynamic idSkl0;
   int count;
 
   factory ProductResult.fromJson(Map<String, dynamic> json) => ProductResult(
