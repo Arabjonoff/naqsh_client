@@ -16,12 +16,14 @@
   "alert": "Rostdan tizimdan chiqmoqchimisiz?",
   "back": "Bekor qilish",
   "price": "Narxi",
-  "count": "Soni",
+  "count": "Dona",
   "add_cart": "Sevatga olish",
   "set_lang": "Tilni o'zgartirish",
   "date": "Sana",
   "product_name": "Tovar nomi",
   "code": "Kod",
   "profile": "Profil",
-  "sum": "So'm"
+  "sum": "So'm",
+  "residual": "Qoldiq",
+  "empty": "Savat bo'sh"
 }

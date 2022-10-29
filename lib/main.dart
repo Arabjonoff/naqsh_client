@@ -12,12 +12,14 @@ void main() async {
   String token = prefs.getString("token") ?? '';
   runApp(
     EasyLocalization(
+      saveLocale: true,
       supportedLocales: const [
         Locale('uz'),
         Locale('en'),
         Locale('ru'),
       ],
-      path: 'assets/i18n/',child:  MyApp(token: token,),
+      startLocale: const Locale('en'),
+      path: 'assets/i18n',child:  MyApp(token: token,),
     ),);
 }
 
@@ -51,5 +53,5 @@ class MyApp extends StatelessWidget {
 }
 
 class ThemeStream {
-  static StreamController<bool> setTheme = StreamController();
+   static StreamController<bool> setTheme = StreamController();
 }

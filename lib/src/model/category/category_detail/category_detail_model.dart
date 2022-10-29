@@ -50,7 +50,7 @@ class ProductResult {
   dynamic narhi;
   dynamic narhiS;
   dynamic snarhi;
-  int snarhiS;
+  dynamic snarhiS;
   dynamic osoni;
   String yil;
   String oy;
@@ -65,8 +65,8 @@ class ProductResult {
         narhi: json["NARHI"] ?? 0,
         narhiS: json["NARHI_S"] ?? 0,
         snarhi: json["SNARHI"] ?? 0,
-        snarhiS: json["SNARHI_S"] ?? 0,
-        osoni: json["OSONI"].toDouble() ?? 0.0,
+        snarhiS: json["SNARHI_S"].toInt() ??0,
+        osoni: json["OSONI"].toInt() ?? 0,
         yil: json["YIL"] ?? "",
         oy: json["OY"] ?? "",
         idSkl0: json["ID_SKL0"] ?? 0,

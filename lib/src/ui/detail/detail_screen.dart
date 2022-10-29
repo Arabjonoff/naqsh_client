@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/bloc/category/category_detail/category_detail_bloc.dart';
+import 'package:naqsh_client/src/bloc/database/login_database.dart';
+import 'package:naqsh_client/src/model/auth/login/login_model.dart';
 import 'package:naqsh_client/src/model/category/category_detail/category_detail_model.dart';
+import 'package:naqsh_client/src/model/model_all/model_all.dart';
 import 'package:naqsh_client/src/widget/image/image_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/category/category_model.dart';
@@ -25,6 +28,8 @@ class _DetailScreenState extends State<DetailScreen> {
   initState() {
     super.initState();
     categoryDetailBloc.getCategoryDetail(widget.data.st, widget.data.id);
+    dataBase.getLoginDatabase();
+    usd();
   }
 
   String? image;
@@ -43,154 +48,214 @@ class _DetailScreenState extends State<DetailScreen> {
         ],
       ),
       body: SafeArea(
-        child: StreamBuilder<GetCategoryDetailModel>(
-            stream: categoryDetailBloc.categoryDetail,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var data = snapshot.data!.data;
-                return GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: data.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16),
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child: ImageWidget(
-                              id: data[index].idSkl2,
-                            )),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(data[index].name),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Narxi',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                  data[index].snarhiS != 0.0
-                                      ? Text(data[index].snarhiS.toString() * usd(),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 15))
-                                      : Text(data[index].snarhi.toString() +' so\'m', style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15),),
-                                ],
-                              ),
-                            ),
-                            data[index].count == 0
-                                ? GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        categoryDetailBloc.updateCart(
-                                            data[index], false);
-                                      });
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 8),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 7),
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xFF5F6DF8),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      width: MediaQuery.of(context).size.width,
-                                      child:  Center(
-                                          child: Text(
-                                        'add_cart'.tr(),
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                    ),
-                                  )
-                                : Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              categoryDetailBloc.updateCart(
-                                                  data[index], true);
-                                            });
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: const Color(0xFF5F6DF8),
-                                            ),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 3.5),
-                                            child: const Icon(
-                                              Icons.remove,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                            child: Center(
-                                                child: Text(
-                                          data[index].count.toString(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ))),
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              categoryDetailBloc.updateCart(
-                                                  data[index], false);
-                                            });
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 3.5),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: const Color(0xFF5F6DF8),
-                                            ),
-                                            child: const Icon(
-                                              Icons.add,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                          ],
+        child: StreamBuilder<ModelAll>(
+          stream: categoryDetailBloc.categoryDetail,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              LoginModel list = snapshot.data!.loginModel;
+              List<ProductResult> getCategory =
+                  snapshot.data!.categoryDetailModel.data;
+              return GridView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: getCategory.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.9,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16),
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: ImageWidget(
+                          id: getCategory[index].idSkl2,
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(getCategory[index].name),
                         ),
-                      );
-                    });
-              }
-              return const Center(child: CircularProgressIndicator());
-            }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'price'.tr(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 15),
+                              ),
+                              getCategory[index].snarhiS != 0.0
+                                  ? Text(
+                                      '${getCategory[index].snarhiS * curs} ${'sum'.tr()}',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15))
+                                  : Text(
+                                      "${getCategory[index].snarhi} ${'sum'.tr()}",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15),
+                                    ),
+                            ],
+                          ),
+                        ),
+                        list.d4 == 1
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 5),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'residual'.tr(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15),
+                                    ),
+                                    getCategory[index].snarhiS != 0.0
+                                        ? Text(
+                                            getCategory[index]
+                                                .snarhiS
+                                                .toString(),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15))
+                                        : Text(
+                                            getCategory[index].osoni.toString(),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15),
+                                          ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+                        getCategory[index].count == 0
+                            ? GestureDetector(
+                                onTap: () {
+                                  list.d2 == 1
+                                      ? setState(() {
+                                          categoryDetailBloc.updateCart(
+                                              getCategory[index], false);
+                                        })
+                                      : null;
+                                },
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 7),
+                                  decoration: BoxDecoration(
+                                      color: list.d2 == 1
+                                          ? const Color(0xFF5F6DF8)
+                                          : Colors.grey,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: Text(
+                                      'add_cart'.tr(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            categoryDetailBloc.updateCart(
+                                                getCategory[index], true);
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: const Color(0xFF5F6DF8),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3.5),
+                                        child: const Icon(
+                                          Icons.remove,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          getCategory[index].count.toString(),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            categoryDetailBloc.updateCart(
+                                                getCategory[index], false);
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3.5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: const Color(0xFF5F6DF8),
+                                        ),
+                                        child: const Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }
-  usd()async{
+
+  usd() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    int? curs = preferences.getInt('curs');
+    var db = preferences.getString('db');
+    http.Response response =
+        await http.get(Uri.parse('https://naqshsoft.site/getkurs?DB=$db&'));
+    final Map<String, dynamic> data = json.decode(response.body);
+    setState(
+      () {
+        curs = data['KURS'];
+      },
+    );
   }
+
+  int curs = 0;
 }

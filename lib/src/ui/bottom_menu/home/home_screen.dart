@@ -80,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
     http.Response response = await http.get(Uri.parse('https://naqshsoft.site/getkurs?DB=$db&'));
     final Map<String ,dynamic> data = json.decode(response.body);
     var getcurs = data['KURS'];
-    preferences.setInt('curs',getcurs);
     setState((){
       clientName = data['NAME'];
     });

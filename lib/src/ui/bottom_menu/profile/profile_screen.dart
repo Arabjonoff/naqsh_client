@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil'),
+        title:  Text('profile'.tr()),
       ),
       body: SafeArea(
         child: StreamBuilder<List<LoginModel>>(
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                      Padding(
-                      padding: EdgeInsets.only(bottom: 10.0,top: 10),
+                      padding: const EdgeInsets.only(bottom: 10.0,top: 10),
                       child: Text(snapshot.data![0].name,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                     ),
                    snapshot.data![0].d3==1? Row(
@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10.0),
-                       child: Text(' ${getDebtS} \$',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                       child: Text(' $getDebtS \$',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
                      ),
                    ],):const SizedBox(height: 10,),
                     snapshot.data![0].d4== 1?Padding(
@@ -75,10 +75,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ListTile(
                         leading: Icon(Icons.attach_money),
                         title: Text('usd'.tr()),
-                        trailing: Text(getUsd.toString() +' uzs',style: TextStyle(fontWeight: FontWeight.bold),)
+                        trailing: Text('$getUsd ${'sum'.tr()}',style: TextStyle(fontWeight: FontWeight.bold),)
                     ),
                     ListTile(
-                        leading: Icon(Icons.dark_mode),
+                        leading: const Icon(Icons.dark_mode),
                         title: Text('dark_mode'.tr()),
                         trailing: CupertinoSwitch(value: _isDark, onChanged: (value){
                           setState(() {

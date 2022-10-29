@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/dialog/error_dialog/error_dialog.dart';
-import 'package:naqsh_client/src/provider/app_provider.dart';
 import 'package:naqsh_client/src/repository/repository.dart';
 import 'package:naqsh_client/src/widget/button/ontap_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,8 +24,8 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Text(
-                  'Tizimga Kirish',
+                 Text(
+                  'login'.tr(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
@@ -36,8 +36,8 @@ class LoginScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: _controllerDb,
-                    decoration: const InputDecoration(
-                        labelText: 'Baza raqami', border: OutlineInputBorder()),
+                    decoration:  InputDecoration(
+                        labelText: 'db'.tr(), border: const OutlineInputBorder()),
                   ),
                 ),
                 const SizedBox(
@@ -50,11 +50,11 @@ class LoginScreen extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     maxLength: 9,
                     controller: _controllerPhone,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                         counterText: '',
                         prefixText: '+998 ',
-                        labelText: 'Telfon raqam',
-                        border: OutlineInputBorder()),
+                        labelText: 'phone'.tr(),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
                 const SizedBox(
@@ -65,16 +65,16 @@ class LoginScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: _controllerPassword,
-                    decoration: const InputDecoration(
-                        labelText: 'Parol kiriting',
-                        border: OutlineInputBorder()),
+                    decoration:  InputDecoration(
+                        labelText: 'password'.tr(),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
                 const SizedBox(
                   height: 32,
                 ),
                 OnTapWidget(
-                  text: 'Kirish',
+                  text: 'enter'.tr(),
                   onTap: ()  {
                     _sendData(context);
                   },
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
     final repo = Repository();
     HttpResult response = await repo.login(
       _controllerDb.text,
-      "998" + _controllerPhone.text,
+      "998${_controllerPhone.text}",
       _controllerPassword.text,
     );
     if (response.isSuccess) {
@@ -99,6 +99,7 @@ class LoginScreen extends StatelessWidget {
       if (result.status == true && result.d1 == 1) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', result.jwt.toString());
+        await prefs.setString('client_name', result.name.toString());
         await prefs.setString('idt', result.idT.toString());
         await prefs.setString('db', _controllerDb.text);
         await prefs.setString('phone', _controllerPhone.text);

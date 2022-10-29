@@ -48,7 +48,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Sana:',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),), Text(DateFormat('dd.MM.yyyy').format(data.result[index].dt),style: const TextStyle(fontSize: 15),),
+                               Text('date'.tr(),style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500),), Text(DateFormat('dd.MM.yyyy').format(data.result[index].dt),style: const TextStyle(fontSize: 15),),
                             ],),
                         ),
                         Padding(
@@ -56,7 +56,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                            const Text('Tovar soni:',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+                             Text('count'.tr(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
                             Text(data.result[index].tzakaz1.map((e) => e.soni).toString()),
                           ],),
                         ),
@@ -65,7 +65,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Tovar nomi:',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+                               Text('product_name'.tr(),style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
                               Expanded(
                                 child: Text(data.result[index].tzakaz1.map((e) => e.name).toString(),textAlign: TextAlign.right,),
                               )
