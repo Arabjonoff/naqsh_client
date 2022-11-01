@@ -33,6 +33,7 @@ class AppProvider {
 
   HttpResult _result(http.Response response) {
     print(response.body);
+    print(response.statusCode);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return HttpResult(
         isSuccess: true,

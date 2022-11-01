@@ -8,6 +8,7 @@ import 'package:naqsh_client/src/bloc/database/login_database.dart';
 import 'package:naqsh_client/src/dialog/lang_dialog/lang_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:naqsh_client/src/dialog/log_out/log_out_dialog.dart';
+import 'package:naqsh_client/src/repository/repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/auth/login/login_model.dart';

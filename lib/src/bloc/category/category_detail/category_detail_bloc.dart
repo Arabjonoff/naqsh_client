@@ -3,7 +3,7 @@ import 'package:naqsh_client/src/model/category/category_detail/category_detail_
 import 'package:naqsh_client/src/model/http/http_model.dart';
 import 'package:naqsh_client/src/model/model_all/model_all.dart';
 import 'package:naqsh_client/src/repository/repository.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart/rxdart.dart';
 
 class CategoryDetailBloc {
   final _repository = Repository();
@@ -24,6 +24,11 @@ class CategoryDetailBloc {
     List<ProductResult> databaseCard = await _repository.getProductCart();
     if (result.isSuccess) {
       data = GetCategoryDetailModel.fromJson(result.result);
+      for (int i = 0; i < databaseCard.length; i++) {
+        if (data.data[i].id == databaseCard[i].id) {
+          data.data[i].count = databaseCard[i].count;
+        }
+      }
       for (int i = 0; i < data.data.length; i++) {
         for (int j = 0; j < databaseCard.length; j++) {
           if (data.data[i].id == databaseCard[j].id) {
