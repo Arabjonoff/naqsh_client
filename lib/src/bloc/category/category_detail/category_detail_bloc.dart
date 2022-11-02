@@ -21,29 +21,32 @@ class CategoryDetailBloc {
 
   getCategoryDetail(int st, id) async {
     HttpResult result = await _repository.getCategoryDetail(st, id);
-    List<ProductResult> databaseCard = await _repository.getProductCart();
     if (result.isSuccess) {
       data = GetCategoryDetailModel.fromJson(result.result);
-      for (int i = 0; i < databaseCard.length; i++) {
-        if (data.data[i].id == databaseCard[i].id) {
-          data.data[i].count = databaseCard[i].count;
-        }
-      }
-      for (int i = 0; i < data.data.length; i++) {
-        for (int j = 0; j < databaseCard.length; j++) {
-          if (data.data[i].id == databaseCard[j].id) {
-            data.data[i].count = databaseCard[j].count;
-          }
-        }
-      }
-      modelAll.categoryDetailModel = data;
-      fetchCategoryDetail.sink.add(modelAll);
+      convert();
     }
-    List<LoginModel> dataBase = await _repository.getLogin();
-    modelAll.loginModel = dataBase.first;
-    fetchCategoryDetail.sink.add(modelAll);
-  }
 
+
+  }
+convert()async{
+  List<ProductResult> databaseCard = await _repository.getProductCart();
+  for (int i = 0; i < databaseCard.length; i++) {
+    if (data.data[i].count == databaseCard[i].id) {
+      data.data[i].count = databaseCard[i].count;
+    }
+  }
+  for (int i = 0; i < data.data.length; i++) {
+    for (int j = 0; j < databaseCard.length; j++) {
+      if (data.data[i].id == databaseCard[j].id) {
+        data.data[i].count = databaseCard[j].count;
+      }
+    }
+  }
+  modelAll.categoryDetailModel = data;
+  fetchCategoryDetail.sink.add(modelAll);
+  List<LoginModel> dataBase = await _repository.getLogin();
+  modelAll.loginModel = dataBase.first;
+}
   updateCart(ProductResult detailResult, bool remove) async {
     if (remove) {
       detailResult.count--;

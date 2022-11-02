@@ -43,7 +43,10 @@ class _DetailScreenState extends State<DetailScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cart');
+                Navigator.pushNamed(
+                  context,
+                  '/cart',
+                );
               },
               icon: const Icon(Icons.shopping_cart_outlined))
         ],
@@ -75,7 +78,10 @@ class _DetailScreenState extends State<DetailScreen> {
                         )),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(getCategory[index].name,maxLines: 1,),
+                          child: Text(
+                            getCategory[index].name,
+                            maxLines: 1,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -135,86 +141,98 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               )
                             : Container(),
-                        getCategory[index].count >0
+                        getCategory[index].count > 0
                             ? Container(
-                          margin:
-                          const EdgeInsets.symmetric(horizontal: 10),
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            children: [
-                              GestureDetector(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          categoryDetailBloc.updateCart(
+                                              getCategory[index], true);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: const Color(0xFF5F6DF8),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3.5),
+                                        child: const Icon(
+                                          Icons.remove,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          getCategory[index].count.toString(),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          setState(() {
+                                            categoryDetailBloc.updateCart(
+                                                getCategory[index], false);
+                                          });
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3.5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: const Color(0xFF5F6DF8),
+                                        ),
+                                        child: const Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : GestureDetector(
                                 onTap: () {
-                                   categoryDetailBloc.updateCart(getCategory[index], true);
+                                  list.d2 == 1
+                                      ? setState(() {
+                                          categoryDetailBloc.updateCart(
+                                              getCategory[index], false);
+                                        })
+                                      : null;
                                 },
                                 child: Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 7),
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(5),
-                                    color: const Color(0xFF5F6DF8),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 3.5),
-                                  child: const Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    getCategory[index].count.toString(),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600),
+                                      color: list.d2 == 1
+                                          ? const Color(0xFF5F6DF8)
+                                          : Colors.grey,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: Text(
+                                      'add_cart'.tr(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () async{
-                                  await categoryDetailBloc.updateCart(getCategory[index], false);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 3.5),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(5),
-                                    color: const Color(0xFF5F6DF8),
-                                  ),
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                            :GestureDetector(
-                          onTap: () async{
-                            list.d2 == 1
-                                ?  await categoryDetailBloc.updateCart(getCategory[index], false) : null;
-                          },
-                          child: Container(
-                            margin:
-                            const EdgeInsets.symmetric(horizontal: 8),
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 7),
-                            decoration: BoxDecoration(
-                                color: list.d2 == 1
-                                    ? const Color(0xFF5F6DF8)
-                                    : Colors.grey,
-                                borderRadius: BorderRadius.circular(5)),
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: Text(
-                                'add_cart'.tr(),
-                                style:
-                                const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ) ,
                         const SizedBox(
                           height: 8,
                         ),

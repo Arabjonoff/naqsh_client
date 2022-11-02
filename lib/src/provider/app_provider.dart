@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/http/http_model.dart';
@@ -6,21 +8,42 @@ import 'package:http/http.dart' as http;
 
 import '../model/order/order_model.dart';
 
+Duration durationTimeout = const Duration(seconds: 30);
+
 class AppProvider {
   final String baseUrl = 'https://naqshsoft.site/';
 
   Future<HttpResult> _getRequest(String url) async {
-      http.Response response = await http.get(
-        Uri.parse(url),
-      );
+    try {
+      http.Response response = await http
+          .get(
+            Uri.parse(
+              url,
+            ),
+          )
+          .timeout(
+            durationTimeout,
+          );
       print(url);
       return _result(response);
+    } on TimeoutException catch (_) {
+      return HttpResult(
+        isSuccess: false,
+        statusCode: -1,
+        result: "Network",
+      );
+    } on SocketException catch (_) {
+      return HttpResult(
+        isSuccess: false,
+        statusCode: -1,
+        result: "Network",
+      );
+    }
   }
-
 
   Future<HttpResult> _postRequest(String url, body) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('token')??'';
+    String token = prefs.getString('token') ?? '';
     http.Response response = await http.post(
       Uri.parse(url),
       body: body,
@@ -29,7 +52,6 @@ class AppProvider {
     print(body);
     return _result(response);
   }
-
 
   HttpResult _result(http.Response response) {
     print(response.body);
@@ -68,7 +90,7 @@ class AppProvider {
     return await _getRequest(url);
   }
 
-  Future<HttpResult> getCategoryDetail(int st,id) async {
+  Future<HttpResult> getCategoryDetail(int st, id) async {
     var now = DateTime.now();
     var years = DateFormat('yyyy');
     var months = DateFormat('MM');
@@ -76,24 +98,26 @@ class AppProvider {
     String month = months.format(now);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var db = prefs.getString('db');
-    String url = '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
+    String url =
+        '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
     return await _getRequest(url);
   }
 
   Future<HttpResult> orderProducts(List<OrderModel> order) async {
-    DateTime dateTime =  DateTime.now();
+    DateTime dateTime = DateTime.now();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('token')??'';
-    String db = prefs.getString('db') ??'';
+    String token = prefs.getString('token') ?? '';
+    String db = prefs.getString('db') ?? '';
     String url = 'https://naqshsoft.site/tzakaz?DB=$db';
-    return await _postRequest(url,json.encode(order));
+    return await _postRequest(url, json.encode(order));
   }
 
   Future<HttpResult> getOrderProducts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String db = prefs.getString('db') ??'';
+    String db = prefs.getString('db') ?? '';
     String url = 'https://naqshsoft.site/tzakaz?DB=$db';
-    return await _getRequest(url,);
+    return await _getRequest(
+      url,
+    );
   }
-
 }

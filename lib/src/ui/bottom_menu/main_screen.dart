@@ -18,11 +18,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [
-      HomeScreen(),
-      const CartScreen(),
-      const ProfileScreen(),
-    ];
     return Scaffold(
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -44,7 +39,11 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      body:screens[selectedIndex]
+      body:[
+        HomeScreen(),
+        const CartScreen(),
+        const ProfileScreen(),
+      ][selectedIndex]
     );
   }
 }

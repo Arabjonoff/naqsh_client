@@ -9,6 +9,7 @@ import 'package:naqsh_client/src/widget/button/ontap_widget.dart';
 import 'package:naqsh_client/src/widget/image/image_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../bloc/category/category_detail/category_detail_bloc.dart';
 import '../../../model/http/http_model.dart';
 import '../../../model/message/message_model.dart';
 import '../../../model/order/order_model.dart';
@@ -16,7 +17,8 @@ import '../../../repository/repository.dart';
 import 'package:http/http.dart'as http;
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+
+  const CartScreen({Key? key,}) : super(key: key);
 
   @override
   State<CartScreen> createState() => _CartScreenState();
