@@ -8,15 +8,30 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../model/auth/login/login_model.dart';
 import '../../../model/http/http_model.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String? db1;
+  String? phone1;
+  String? password1;
+
+
 
   final _controllerDb = TextEditingController();
   final _controllerPhone = TextEditingController();
   final _controllerPassword = TextEditingController();
-  bool _loading = false;
-
+@override
+  void initState() {
+  login();
+    super.initState();
+  }
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -103,6 +118,7 @@ class LoginScreen extends StatelessWidget {
         await prefs.setString('idt', result.idT.toString());
         await prefs.setString('db', _controllerDb.text);
         await prefs.setString('phone', _controllerPhone.text);
+        await prefs.setString('password', _controllerPassword.text);
         repo.saveLogin(
           LoginModel(
             d1: result.d1,
@@ -122,6 +138,7 @@ class LoginScreen extends StatelessWidget {
       }
     }
   }
+
   showLoaderDialog(BuildContext context){
     AlertDialog alert=AlertDialog(
       content:  Row(
@@ -137,4 +154,16 @@ class LoginScreen extends StatelessWidget {
       },
     );
   }
+  login()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var  db = prefs.getString('db')??'';
+    var  phone = prefs.getString('phone')??'';
+    var  password = prefs.getString('password')??'';
+    setState(() {
+      db1 = db;
+      phone1 = phone;
+      password1 = password;
+    });
+  }
+
 }

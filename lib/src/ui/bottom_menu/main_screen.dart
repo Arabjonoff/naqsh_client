@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:naqsh_client/src/repository/repository.dart';
 import 'package:naqsh_client/src/ui/bottom_menu/cart/cart_screen.dart';
 import 'package:naqsh_client/src/ui/bottom_menu/profile/profile_screen.dart';
 
@@ -7,13 +7,19 @@ import 'home/home_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
-   MainScreen({Key? key}) : super(key: key);
+   const MainScreen({Key? key}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
+Repository repository = Repository();
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void dispose() {
+    repository.clear();
+    super.dispose();
+  }
   int selectedIndex = 0;
 
   @override

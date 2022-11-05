@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:naqsh_client/src/bloc/category/category_bloc.dart';
 import 'package:naqsh_client/src/model/category/category_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:naqsh_client/src/model/http/http_model.dart';
-import 'package:naqsh_client/src/repository/repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart'as http;
 
@@ -52,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.pushNamed(context, '/detail',arguments: data[index]);
                       },
                       child: Card(
-                        elevation: 3,
+                        elevation: 5,
                         child: Column(
                           children: [
                             Expanded(child: CachedNetworkImage(

@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                      children: [
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10.0),
-                       child: Text('${'debt'.tr()}- ${getDebt} som',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                       child: Text('${'debt'.tr()}: ${getDebt} ${'sum'.tr()}',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10.0),

@@ -40,16 +40,16 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.data.name),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/cart',
-                );
-              },
-              icon: const Icon(Icons.shopping_cart_outlined))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {
+        //         Navigator.pushNamed(
+        //           context,
+        //           '/cart',
+        //         );
+        //       },
+        //       icon: const Icon(Icons.shopping_cart_outlined))
+        // ],
       ),
       body: SafeArea(
         child: StreamBuilder<ModelAll>(

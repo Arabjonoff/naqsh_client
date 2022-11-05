@@ -98,8 +98,7 @@ class AppProvider {
     String month = months.format(now);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var db = prefs.getString('db');
-    String url =
-        '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
+    String url = '${baseUrl}sklad01?DB=$db&YIL=$year&OY=$month&ID_SKL0=$st&ID_TIP=$id';
     return await _getRequest(url);
   }
 
@@ -115,7 +114,9 @@ class AppProvider {
   Future<HttpResult> getOrderProducts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String db = prefs.getString('db') ?? '';
-    String url = 'https://naqshsoft.site/tzakaz?DB=$db';
+    String idt = prefs.getString('idt') ?? '';
+    var dateTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    String url = 'https://naqshsoft.site/tzakaz?DB=$db&ID_T=$idt&SANA=$dateTime';
     return await _getRequest(
       url,
     );

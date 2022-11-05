@@ -309,7 +309,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ndoc: '0',
                                   idToch: idt,
                                   izoh: '',
-                                  dt: '',
+                                  dt: DateTime.now().toIso8601String(),
                                   sm: price.toInt(),
                                   tzakaz1: p,
                                 );

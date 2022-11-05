@@ -40,11 +40,17 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: snapshot.data ? AppTheme.dark() : AppTheme.light(),
                 title: 'Flutter Demo',
-                initialRoute: token == '' ? '/login' : '/',
+                initialRoute: '/login',
                 onGenerateRoute: _route.onGenerator,
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
+                builder: (context, child) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: child!,
+                  );
+                },
               );
             }
           );
